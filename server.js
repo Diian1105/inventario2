@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const cors = require('cors');
 
 //rutas
-
+const producto= require('./routes/rutasProducto');
 
 
 app.use(express.json())
@@ -19,6 +19,8 @@ app.use(cors());
 app.set('x-powered-by', false);
 
 const port = 3900;
+
+app.use('/api/productos', producto);
 
 
 app.get('/', (req, res)=>{
@@ -33,7 +35,7 @@ app.use((req, res, next) => {
 
 // Middleware para manejar errores
 app.use((err, req, res, next) => {
-  console.error(err.stack); // Imprime el error en consola para depuración
+  console.error(err.stack); 
   res.status(err.status || 500).send({
     success: false,
     message: err.message || 'Error interno del servidor',
