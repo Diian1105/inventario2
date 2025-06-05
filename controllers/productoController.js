@@ -15,5 +15,56 @@ productoController.getAllProductos = async (req, res) => {
 };
 
 
+//Registrar Productos
+productoController.registrarProducto = async (req, res, next) => {
+    try {
+       const producto = req.body;
+        console.log("Producto registrado:", producto); 
+        
+        if (!producto.id_producto || 
+            !producto.nombre_producto || 
+            !producto.descripcion_producto || 
+            !producto.codigo_barras || 
+            !producto.sku || 
+            !producto.precio_compra || 
+            !producto.precio_venta || 
+            !producto.precio_total || 
+            !producto.stock_actual || 
+            !producto.stock_minimo || 
+            !producto.stock_maximo || 
+            !producto.id_categoria || 
+            !producto.id_proveedor || 
+            !producto.fecha_creacion || 
+            !producto.estado || 
+            !producto.codigo_qr ) {
+    
+            return res.status(400).json({
+                success: false,
+                message: "Faltan campos requeridos",
+            });
+        }
+
+        const nuevoProducto = await productoModels.registrarProducto(req.body);
+
+         return res.status(201).json({
+            success: true,
+            message: "Producto registrado correctamente",
+            data: nuevoProducto
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error al registrar producto",
+            error: error.message
+        });
+    }
+};
+
+
 
 module.exports = productoController;
+
+
+
