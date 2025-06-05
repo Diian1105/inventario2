@@ -18,7 +18,7 @@ app.use(cors());
 
 app.set('x-powered-by', false);
 
-const port = 3900;
+const port = 3000;
 
 app.use('/api/productos', producto);
 
