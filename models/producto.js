@@ -1,17 +1,27 @@
 const db = require ('../config/config');
 
+<<<<<<< HEAD
 //const Producto = require('../models/producto');
 
 const Producto = {};
 
 //OBTENER TODOS LOS PRODUCTOS
+=======
+const Producto = {};
+
+//Obtener todos los productos  
+>>>>>>> d45678c032523e034c880c3590f0c8792efe7fbe
 Producto.getAll = () => {
     const sql = 'SELECT * FROM public.productos';
     return db.manyOrNone(sql);
 }
 
 
+<<<<<<< HEAD
 //  INSERTAR DATOS A LA TABLA PRODUCTOS
+=======
+//Insertar datos a la tabla productos
+>>>>>>> d45678c032523e034c880c3590f0c8792efe7fbe
 
 Producto.registrarProducto = async (datos) => {
     const sql = 'INSERT INTO public.productos (id_producto, nombre_producto, descripcion_producto, codigo_barras, sku, precio_compra, precio_venta, precio_total, stock_actual, stock_minimo, stock_maximo, id_categoria, id_proveedor, fecha_creacion, estado, codigo_qr, imagen_producto) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING id_producto';
@@ -19,6 +29,7 @@ Producto.registrarProducto = async (datos) => {
 }
 
 
+<<<<<<< HEAD
 //BUSCAR POR NOMBRE DEL PRODUCTO
 
 Producto.buscarPorNombre = async (nombre) => {
@@ -44,6 +55,8 @@ Producto.buscarPorNombre = async (nombre) => {
 
 
   
+=======
+>>>>>>> d45678c032523e034c880c3590f0c8792efe7fbe
 
 
 
