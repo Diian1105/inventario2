@@ -17,7 +17,7 @@ Producto.getAll = () => {
 
 //  INSERTAR DATOS A LA TABLA PRODUCTOS
 
-//Insertar datos a la tabla productos
+
 
 
 Producto.registrarProducto = async (datos) => {
@@ -50,7 +50,22 @@ Producto.buscarPorNombre = async (nombre) => {
   
 //BUSCAR POR ID DEL PRODUCTO
 
+Producto.buscarPorId = async (Id) => {
+  const sql = `
+    SELECT * FROM productos
+    WHERE id_producto = $1
+    ORDER BY id_producto ASC
+  `;
 
+  try {
+    const result = await db.any(sql, [Id]);
+    console.log('Filas obtenidas:', result);
+    return result;
+  } catch (error) {
+    console.error('Error en la consulta:', error.message || error);
+    throw error; 
+  }
+};
 
 
 

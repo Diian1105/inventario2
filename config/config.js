@@ -20,9 +20,7 @@ types.setTypeParser(1114, (stringValue) => stringValue);
 // Configuración de la base de datos
 const dataBaseConfig = {
   host: 'aws-0-us-east-2.pooler.supabase.com', 
-
   port: 5432, 
-
   database: 'postgres', 
   user: 'postgres.jmvfgqkginlpubpzjdrw',     
   password: 'abksdbasjdkasgdhjadgsdfhsdcadbn',

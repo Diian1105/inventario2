@@ -103,5 +103,40 @@ productoController.buscarPorNombre = async (req, res) => {
 
 
 
+//BUSCAR POR ID DEL PRODUCTO
+
+productoController.buscarPorId = async (req, res) => {
+  try {
+    const { Id } = req.params;
+    console.log('Id recibido:', Id);
+
+    if (!Id) {
+      return res.status(400).json({ success: false, message: 'Id requerido' });
+    }
+
+    const resultados = await Producto.buscarPorId(Id);
+    
+    if (resultados.length === 0) {
+      return res.status(200).json({ 
+        success: true, 
+        message: "No se encontró Id", 
+        data: [] 
+      });
+    }
+
+    return res.status(200).json({ success: true, data: resultados });
+
+  } catch (error) {
+    console.error('Error en controlador:', error.message);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Error interno del servidor',
+      error: error.message 
+    });
+  }
+};
+
+
+
 
 module.exports = productoController;
