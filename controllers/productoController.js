@@ -138,5 +138,31 @@ productoController.buscarPorId = async (req, res) => {
 
 
 
+//ELIMINAR POR ID
+productoController.eliminarPorId = async (req, res) => {
+  try {
+    const { Id } = req.params;
+    console.log('Id recibido para eliminar:', Id);
+
+    if (!Id) {
+      return res.status(400).json({ success: false, message: 'Id requerido para eliminar'});
+    }
+    const filasEliminadas = await Producto.eliminarPorId(Id);
+
+    if (filasEliminadas === 0) {
+      return res.status(400).json({ success: false, message: 'No se encontró producto con ese Id'});
+    }
+    return res.status(200).json({ success: true, message: 'Producto eliminado correctamente'});
+  } catch (error) {
+    console.error('Error en controlador al eliminar:', error.mesaage);
+    return res.status(500).json({
+      success: false,
+      message: 'Error interno del servidor al eliminar',
+      error: errror.message
+    });
+  }
+};
+
+
 
 module.exports = productoController;

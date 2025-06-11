@@ -69,6 +69,24 @@ Producto.buscarPorId = async (Id) => {
 
 
 
+//ELIMINAR POR ID
+
+Producto.eliminarPorId = async (Id) => {
+  const sql = `
+    DELETE FROM productos
+    WHERE id_producto = $1
+  `;
+
+  try {
+    const result = await db.result(sql, [Id]);
+    console.log(`Filas eliminadas: ${result.rowCount}`);
+    return result.rowCount; 
+  } catch (error) {
+    console.error('Error al eliminar:', error.message || error);
+    throw error;
+  }
+};
+
 
 module.exports = Producto;
 
