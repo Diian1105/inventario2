@@ -165,4 +165,36 @@ productoController.eliminarPorId = async (req, res) => {
 
 
 
+//ACTUALIZAR POR ID
+
+productoController.actualizarPorId = async (req, res) => {
+  const id_producto = req.params.id;
+  const datos = req.body;
+
+  if (!id_producto) {
+    return res.status(400).json({ message: 'El id_producto es requerido' });
+  }
+
+  try {
+    const filasActualizadas = await Producto.actualizarPorId(id_producto, datos);
+
+    if (filasActualizadas === 0) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+
+    res.json({ message: 'Producto actualizado correctamente' });
+  } catch (error) {
+    console.error('Error en controlador actualizarPorId:', error);
+    res.status(500).json({ message: 'Error al actualizar el producto' });
+  }
+};
+
+
+
+
+
+
+
+
+
 module.exports = productoController;

@@ -88,6 +88,81 @@ Producto.eliminarPorId = async (Id) => {
 };
 
 
+//ACTUALIZAR POR ID
+Producto.actualizarPorId = async (id_producto, datos) => {
+  const {
+    nombre_producto,
+    descripcion_producto,
+    codigo_barras,
+    sku,
+    precio_compra,
+    precio_venta,
+    precio_total,
+    stock_actual,
+    stock_minimo,
+    stock_maximo,
+    id_categoria,
+    id_proveedor,
+    fecha_creacion,
+    estado,
+    codigo_qr,
+  } = datos;
+
+  const sql = `
+    UPDATE productos
+    SET 
+      nombre_producto = $1,
+      descripcion_producto = $2,
+      codigo_barras = $3,
+      sku = $4,
+      precio_compra = $5,
+      precio_venta = $6,
+      precio_total = $7,
+      stock_actual = $8,
+      stock_minimo = $9,
+      stock_maximo = $10,
+      id_categoria = $11,
+      id_proveedor = $12,
+      fecha_creacion = $13,
+      estado = $14,
+      codigo_qr = $15
+    WHERE id_producto = $16
+  `;
+
+  const values = [
+    nombre_producto,
+    descripcion_producto,
+    codigo_barras,
+    sku,
+    precio_compra,
+    precio_venta,
+    precio_total,
+    stock_actual,
+    stock_minimo,
+    stock_maximo,
+    id_categoria,
+    id_proveedor,
+    fecha_creacion,
+    estado,
+    codigo_qr,
+    id_producto,
+  ];
+
+  try {
+    const result = await db.result(sql, values);
+    console.log(`Filas actualizadas: ${result.rowCount}`);
+    return result.rowCount;
+  } catch (error) {
+    console.error('Error al actualizar:', error.message || error);
+    throw error;
+  }
+};
+
+
+
+
+
+
 module.exports = Producto;
 
 

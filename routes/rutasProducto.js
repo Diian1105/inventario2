@@ -9,6 +9,8 @@ router.post('/registrarProducto', productoController.registrarProducto);
 router.get('/buscarPorNombre/:nombre', productoController.buscarPorNombre);
 router.get('/buscarPorId/:Id', productoController.buscarPorId);
 router.get('/eliminarPorId/:Id',productoController.eliminarPorId)
+router.put('/actualizarPorId/:id', productoController.actualizarPorId);
+
 
 
 module.exports= router;
