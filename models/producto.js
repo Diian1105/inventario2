@@ -6,7 +6,7 @@ const db = require ('../config/config');
 const Producto = {};
 
 
-//Obtener todos los productos  
+//OBTENER TODOS LOS PRODUCTOS 
 
 Producto.getAll = () => {
     const sql = 'SELECT * FROM public.productos';
@@ -159,6 +159,19 @@ Producto.actualizarPorId = async (id_producto, datos) => {
 };
 
 
+
+
+             //SUBIR Y ACTUALIZAR IMAGEN
+
+Producto.actualizarImagen = async (id, nombreProducto, imagenProducto) => {
+  const sql = `
+    UPDATE productos
+    SET nombre_producto = $1,
+        imagen_producto = $2
+    WHERE id_producto = $3;
+  `;
+  return db.none(sql, [nombreProducto, imagenProducto, id]);
+};
 
 
 

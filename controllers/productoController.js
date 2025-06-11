@@ -191,6 +191,36 @@ productoController.actualizarPorId = async (req, res) => {
 
 
 
+//SUBIR Y ACTUALIZAR IMAGEN 
+
+//const { Pool } = require('pg');
+//const pool = new Pool({ /* tu configuración de conexión */ });
+
+productoController.actualizarImagen = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const nombreProducto = req.body.nombreProducto; 
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se subió ninguna imagen' });
+    }
+    if (!nombreProducto) {
+      return res.status(400).json({ error: 'Falta el nombre del producto' });
+    }
+
+    const nombreArchivo = req.file.filename;
+
+    // Usa el método del modelo para actualizar ambos campos
+    await Producto.actualizarImagen(id, nombreProducto, nombreArchivo);
+
+    res.json({ mensaje: 'Producto e imagen actualizados correctamente' });
+  } catch (error) {
+    console.error('Error al actualizar imagen:', error);
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
+};
+
+
 
 
 
