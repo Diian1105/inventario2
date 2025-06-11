@@ -1,18 +1,10 @@
-<<<<<<< HEAD
+
 //const productoModels = require('../models/producto');
 const Producto = require('../models/producto');
 
 const productoController = {};
 
 //OBTENER TODOS LOS PRODUCTOS
-=======
-const productoModels = require('../models/producto');
-
-
-const productoController = {};
-
-//Obtener todos los productos
->>>>>>> d45678c032523e034c880c3590f0c8792efe7fbe
 productoController.getAllProductos = async (req, res) => {
     try {
         const productos = await productoModels.getAll();
@@ -24,11 +16,7 @@ productoController.getAllProductos = async (req, res) => {
 };
 
 
-<<<<<<< HEAD
 //REGISTRAR PRODUCTOS
-=======
-//Registrar Productos
->>>>>>> d45678c032523e034c880c3590f0c8792efe7fbe
 productoController.registrarProducto = async (req, res, next) => {
     try {
        const producto = req.body;
@@ -77,7 +65,6 @@ productoController.registrarProducto = async (req, res, next) => {
 
 
 
-<<<<<<< HEAD
 
 //BUSCAR POR NOMBRE DEL PRODUCTO
 
@@ -117,9 +104,4 @@ productoController.buscarPorNombre = async (req, res) => {
 
 
 
-=======
->>>>>>> d45678c032523e034c880c3590f0c8792efe7fbe
 module.exports = productoController;
-
-
-
