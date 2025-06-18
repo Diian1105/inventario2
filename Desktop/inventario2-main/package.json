@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Diian1105/inventario2#readme",
   "dependencies": {
     "bluebird": "^3.7.2",
+    "bwip-js": "^4.6.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "http": "^0.0.1-security",

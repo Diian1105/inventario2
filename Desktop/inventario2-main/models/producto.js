@@ -176,25 +176,24 @@ Producto.actualizarImagen = async (id, nombreProducto, imagenProducto) => {
 //GENERAR QR
 //REGISTRAR PRODUCTOS PERO AHORA ELIMINANDO LA COLUMNA QR YA QUE AHORA LO VA A GENERAR AUTOMÁTICAMENTE
 Producto.registrarProducto = async (datos) => {
-    const sql = 
-        `INSERT INTO public.productos(
-        id_producto, nombre_producto, descripcion_producto, 
-        codigo_barras, sku, precio_compra, precio_venta, 
-        precio_total, stock_actual, stock_minimo, stock_maximo, 
-        id_categoria, id_proveedor, fecha_creacion, estado, 
-        codigo_qr, imagen_producto
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) 
-        RETURNING id_producto`;
-    
+    const sql = `INSERT INTO public.productos (
+    id_producto, nombre_producto, descripcion_producto, 
+    codigo_barras, sku, precio_compra, precio_venta, 
+    precio_total, stock_actual, stock_minimo, stock_maximo, 
+    id_categoria, id_proveedor, fecha_creacion, estado, 
+    codigo_qr, imagen_producto, codigo_barras_img
+    ) VALUES (
+    $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18
+    ) RETURNING id_producto`;
 
-    const params = [
-        datos.id_producto, datos.nombre_producto, datos.descripcion_producto,
-        datos.codigo_barras, datos.sku, datos.precio_compra, datos.precio_venta,
-        datos.precio_total, datos.stock_actual, datos.stock_minimo, datos.stock_maximo,
-        datos.id_categoria, datos.id_proveedor, datos.fecha_creacion, datos.estado,
-        datos.codigo_qr, datos.imagen_producto || null // Permitir null para imagen_producto
-    ];
-
+const params = [
+    datos.id_producto, datos.nombre_producto, datos.descripcion_producto,
+    datos.codigo_barras, datos.sku, datos.precio_compra, datos.precio_venta,
+    datos.precio_total, datos.stock_actual, datos.stock_minimo, datos.stock_maximo,
+    datos.id_categoria, datos.id_proveedor, datos.fecha_creacion, datos.estado,
+    datos.codigo_qr, datos.imagen_producto || null,
+    datos.codigo_barras_img || null // <--- aquí
+];
     return db.one(sql, params);
 };
 

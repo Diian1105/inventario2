@@ -10,6 +10,13 @@ const fs = require ('fs');
 const path = require('path');
 
 
+//PARA GENERAR CODIGO DE BARRAS
+const bwipjs = require ('bwip-js');
+
+
+
+
+
 
 //OBTENER TODOS LOS PRODUCTOS
 productoController.getAllProductos = async (req, res) => {
@@ -254,17 +261,107 @@ const generarYGuardarQR = async (idProducto) => {
 };
 
 
-//REGISTRAR PRODUCTO Y GENERAR QR 
+// //REGISTRAR PRODUCTO Y GENERAR QR 
+// productoController.registrarProducto = async (req, res, next) => {
+//     try {
+//         const producto = req.body;
+
+
+//         console.log('Producto recibido:', producto);
+//         console.log('ID producto para QR:', producto.id_producto);
+
+        
+//         // Eliminar codigo_qr de la validación (ahora lo generamos)
+//         const requiredFields = [
+//             'id_producto', 'nombre_producto', 'descripcion_producto',
+//             'codigo_barras', 'sku', 'precio_compra', 'precio_venta',
+//             'precio_total', 'stock_actual', 'stock_minimo', 'stock_maximo',
+//             'id_categoria', 'id_proveedor', 'fecha_creacion', 'estado'
+//         ];
+
+//         const missingFields = requiredFields.filter(field => !producto[field]);
+//         if (missingFields.length > 0) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: `Faltan campos: ${missingFields.join(', ')}`
+//             });
+//         }
+
+//         // Generar QR REGISTRANDO EL PRODUCTO
+//         producto.codigo_qr = await generarYGuardarQR(producto.id_producto);
+
+//         const nuevoProducto = await Producto.registrarProducto(producto);
+
+//         return res.status(201).json({
+//             success: true,
+//             message: "Producto registrado correctamente",
+//             data: nuevoProducto
+//         });
+
+//     } catch (error) {
+//         console.error('Error completo:', error);
+//         return res.status(500).json({
+//             success: false,
+//             message: error.message.includes('QR') 
+//                    ? 'Error al generar QR' 
+//                    : 'Error al registrar producto',
+//             error: error.message
+//         });
+//     }
+// };
+
+
+
+
+
+
+
+
+/*GENERAR CODIGO DE BARRAS (AL REGISTRAR UN PRODUCTO EN AUTOMÁTICO GENERA EL CODIGO QR Y EL CODIGO DE BARRAS 
+GUARDANDO UNA IMAGEN POR CADA UNO EN LA CARPETA PUBLIC HAY 2 CARPETAS MAS UNA EN DONDE SE GUARDA EL CODIGO QR Y OTRA EN DONDE SE GUARDA EL CODIGO DE BARRAS)*/
+
+const generarYGuardarCodigoBarras = async (codigoBarras) => {
+  try {
+    if (!codigoBarras || (typeof codigoBarras !== 'string' && typeof codigoBarras !== 'number')) {
+      throw new Error('El código de barras es inválido');
+    }
+    //Carpeta en donde se guardará el archivo de codigo de barras
+    const barcodesFolder = path.join(__dirname, '../public/barcodes');
+    const barcodeFile = path.join(barcodesFolder, `barcode-${codigoBarras}.png`);
+
+    // Crear carpeta si no existe
+    await fs.promises.mkdir(barcodesFolder, { recursive: true });
+
+    // Generar el código de barras como buffer PNG
+    const pngBuffer = await bwipjs.toBuffer({
+      bcid: 'code128',            // Tipo de código de barras
+      text: String(codigoBarras), // Texto a codificar
+      scale: 3,                   // Escala de la imagen
+      height: 10,                 // Altura de barras en mm
+      includetext: true,          // Incluir texto debajo
+      textxalign: 'center',       // Alineación del texto
+    });
+
+    // Guardar el buffer como archivo PNG
+    await fs.promises.writeFile(barcodeFile, pngBuffer);
+
+    // Retornar la ruta relativa para guardar en la base de datos o usar en frontend
+    return `/public/barcodes/barcode-${codigoBarras}.png`;
+
+  } catch (error) {
+    throw new Error(`Error generando código de barras: ${error.message}`);
+  }
+};
+
+
+
 productoController.registrarProducto = async (req, res, next) => {
     try {
         const producto = req.body;
 
-
         console.log('Producto recibido:', producto);
         console.log('ID producto para QR:', producto.id_producto);
 
-        
-        // Eliminar codigo_qr de la validación (ahora lo generamos)
         const requiredFields = [
             'id_producto', 'nombre_producto', 'descripcion_producto',
             'codigo_barras', 'sku', 'precio_compra', 'precio_venta',
@@ -280,9 +377,13 @@ productoController.registrarProducto = async (req, res, next) => {
             });
         }
 
-        // Generar QR y agregar al objeto
+        // Generar QR
         producto.codigo_qr = await generarYGuardarQR(producto.id_producto);
 
+        // Generar código de barras y guardar la ruta en un nuevo campo
+        producto.codigo_barras_img = await generarYGuardarCodigoBarras(producto.codigo_barras);
+
+        // Ahora puedes guardar el producto incluyendo la ruta del código de barras
         const nuevoProducto = await Producto.registrarProducto(producto);
 
         return res.status(201).json({
@@ -295,14 +396,15 @@ productoController.registrarProducto = async (req, res, next) => {
         console.error('Error completo:', error);
         return res.status(500).json({
             success: false,
-            message: error.message.includes('QR') 
-                   ? 'Error al generar QR' 
+            message: error.message.includes('código de barras')
+                   ? 'Error al generar código de barras'
+                   : error.message.includes('QR')
+                   ? 'Error al generar QR'
                    : 'Error al registrar producto',
             error: error.message
         });
     }
 };
-
 
 
 
