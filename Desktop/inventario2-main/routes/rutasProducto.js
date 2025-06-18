@@ -34,5 +34,4 @@ router.put('/actualizarImagen/:id', upload.single('imagen'), productoController.
 
 
 
-
 module.exports= router;

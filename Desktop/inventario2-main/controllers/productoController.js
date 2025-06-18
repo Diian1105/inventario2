@@ -1,8 +1,10 @@
+
 //const productoModels = require('../models/producto');
 const Producto = require('../models/producto');
 const productoController = {};
 
-//PARA GENERAR Y GUARDAR QR
+
+// PARA GENERAR Y GUARDAR QE
 const qrcode = require('qrcode');
 const fs = require ('fs');
 const path = require('path');
@@ -19,9 +21,6 @@ productoController.getAllProductos = async (req, res) => {
         res.status(500).json({ message:"Error al obtener los productos"});
     }
 };
-
-
-
 
 
 //REGISTRAR PRODUCTOS
@@ -173,6 +172,8 @@ productoController.eliminarPorId = async (req, res) => {
 
 
 
+
+
 //ACTUALIZAR POR ID
 
 productoController.actualizarPorId = async (req, res) => {
@@ -184,12 +185,12 @@ productoController.actualizarPorId = async (req, res) => {
   }
 
   try {
-
     const filasActualizadas = await Producto.actualizarPorId(id_producto, datos);
 
     if (filasActualizadas === 0) {
       return res.status(404).json({ message: 'Producto no encontrado' });
     }
+
     res.json({ message: 'Producto actualizado correctamente' });
   } catch (error) {
     console.error('Error en controlador actualizarPorId:', error);
@@ -218,7 +219,9 @@ productoController.actualizarImagen = async (req, res) => {
 
     const nombreArchivo = req.file.filename;
 
+    // Usa el método del modelo para actualizar ambos campos
     await Producto.actualizarImagen(id, nombreProducto, nombreArchivo);
+
     res.json({ mensaje: 'Producto e imagen actualizados correctamente' });
   } catch (error) {
     console.error('Error al actualizar imagen:', error);
@@ -238,12 +241,10 @@ const generarYGuardarQR = async (idProducto) => {
       throw new Error('El id_producto es inválido para generar QR');
     }
 
-    const qrFolder = path.join(__dirname, '../public/qrcodes');
+    const qrFolder = path.join(__dirname, '../public/codes');
     const qrPath = path.join(qrFolder, `qr-${idProducto}.png`);
 
-    await fs.promises.mkdir(qrFolder, { recursive: true });
-
-    // Convierte a string para evitar problemas
+    await fs.promises.mkdir(qrFolder, { recursive:true});
     await qrcode.toFile(qrPath, String(idProducto));
 
     return `/public/qrcodes/qr-${idProducto}.png`;
@@ -253,9 +254,7 @@ const generarYGuardarQR = async (idProducto) => {
 };
 
 
-
-//REGISTRAR PRODUCTO Y GENERAR QR
-
+//REGISTRAR PRODUCTO Y GENERAR QR 
 productoController.registrarProducto = async (req, res, next) => {
     try {
         const producto = req.body;
@@ -303,6 +302,8 @@ productoController.registrarProducto = async (req, res, next) => {
         });
     }
 };
+
+
 
 
 
