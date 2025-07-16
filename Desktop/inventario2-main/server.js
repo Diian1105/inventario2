@@ -12,6 +12,7 @@ const path = require('path');
 const producto = require('./routes/rutasProducto');     //productos
 const categoria = require ('./routes/rutasCategoria');  // categorias
 const proveedor = require ('./routes/rutasProveedor');  //proveedores
+const cliente = require ('./routes/rutasCliente');      //clientes
 
 
 
@@ -28,9 +29,10 @@ app.set('x-powered-by', false);
 
 const port = 3000;
 
-app.use('/api/productos', producto);    //productos
-app.use('/api/categorias',categoria);  //categorias
+app.use('/api/productos', producto);     //productos
+app.use('/api/categorias',categoria);    //categorias
 app.use('/api/proveedores', proveedor);  //proveedores
+app.use('/api/clientes', cliente);       //clientes
 
 
 app.get('/', (req, res)=>{
