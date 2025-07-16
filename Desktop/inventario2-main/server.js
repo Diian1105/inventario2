@@ -9,7 +9,10 @@ const cors = require('cors');
 const path = require('path');
 
 //rutas
-const producto= require('./routes/rutasProducto');
+const producto = require('./routes/rutasProducto');     //productos
+const categoria = require ('./routes/rutasCategoria');  // categorias
+const proveedor = require ('./routes/rutasProveedor');  //proveedores
+
 
 
 app.use(express.json())
@@ -25,7 +28,9 @@ app.set('x-powered-by', false);
 
 const port = 3000;
 
-app.use('/api/productos', producto);
+app.use('/api/productos', producto);    //productos
+app.use('/api/categorias',categoria);  //categorias
+app.use('/api/proveedores', proveedor);  //proveedores
 
 
 app.get('/', (req, res)=>{

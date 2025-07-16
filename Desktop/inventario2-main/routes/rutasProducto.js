@@ -7,7 +7,7 @@ const productoController = require('../controllers/productoController');
 // Configuración de Multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');  // Asegúrate que esta carpeta exista
+    cb(null, 'uploads/'); //Esta carpeta debe de estar creada
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + path.extname(file.originalname);

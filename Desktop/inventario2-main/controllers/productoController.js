@@ -1,5 +1,5 @@
 
-//const productoModels = require('../models/producto');
+const productoModels = require('../models/producto');
 const Producto = require('../models/producto');
 const productoController = {};
 
@@ -30,52 +30,57 @@ productoController.getAllProductos = async (req, res) => {
 };
 
 
+
+
+
 //REGISTRAR PRODUCTOS
-// productoController.registrarProducto = async (req, res, next) => {
-//     try {
-//        const producto = req.body;
-//         console.log("Producto registrado:", producto); 
+productoController.registrarProducto = async (req, res, next) => {
+    try {
+       const producto = req.body;
+        console.log("Producto registrado:", producto); 
         
-//         if (!producto.id_producto || 
-//             !producto.nombre_producto || 
-//             !producto.descripcion_producto || 
-//             !producto.codigo_barras || 
-//             !producto.sku || 
-//             !producto.precio_compra || 
-//             !producto.precio_venta || 
-//             !producto.precio_total || 
-//             !producto.stock_actual || 
-//             !producto.stock_minimo || 
-//             !producto.stock_maximo || 
-//             !producto.id_categoria || 
-//             !producto.id_proveedor || 
-//             !producto.fecha_creacion || 
-//             !producto.estado || 
-//             !producto.codigo_qr ) {
+        if (!producto.id_producto || 
+            !producto.nombre_producto || 
+            !producto.descripcion_producto || 
+            !producto.codigo_barras || 
+            !producto.sku || 
+            !producto.precio_compra || 
+            !producto.precio_venta || 
+            !producto.precio_total || 
+            !producto.stock_actual || 
+            !producto.stock_minimo || 
+            !producto.stock_maximo || 
+            !producto.id_categoria || 
+            !producto.id_proveedor || 
+            !producto.fecha_creacion || 
+            !producto.estado || 
+            !producto.codigo_qr ) {
     
-//             return res.status(400).json({
-//                 success: false,
-//                 message: "Faltan campos requeridos",
-//             });
-//         }
+            return res.status(400).json({
+                success: false,
+                message: "Faltan campos requeridos",
+            });
+        }
 
-//         const nuevoProducto = await productoModels.registrarProducto(req.body);
+        const nuevoProducto = await productoModels.registrarProducto(req.body);
 
-//          return res.status(201).json({
-//             success: true,
-//             message: "Producto registrado correctamente",
-//             data: nuevoProducto
-//         });
+         return res.status(201).json({
+            success: true,
+            message: "Producto registrado correctamente",
+            data: nuevoProducto
+        });
 
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({
-//             success: false,
-//             message: "Error al registrar producto",
-//             error: error.message
-//         });
-//     }
-// };
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error al registrar producto",
+            error: error.message
+        });
+    }
+};
+
+
 
 
 
@@ -152,6 +157,8 @@ productoController.buscarPorId = async (req, res) => {
 
 
 
+
+
 //ELIMINAR POR ID
 productoController.eliminarPorId = async (req, res) => {
   try {
@@ -207,6 +214,10 @@ productoController.actualizarPorId = async (req, res) => {
 
 
 
+
+
+
+
 //SUBIR Y ACTUALIZAR IMAGEN 
 
 //const { Pool } = require('pg');
@@ -226,7 +237,6 @@ productoController.actualizarImagen = async (req, res) => {
 
     const nombreArchivo = req.file.filename;
 
-    // Usa el método del modelo para actualizar ambos campos
     await Producto.actualizarImagen(id, nombreProducto, nombreArchivo);
 
     res.json({ mensaje: 'Producto e imagen actualizados correctamente' });
@@ -235,6 +245,8 @@ productoController.actualizarImagen = async (req, res) => {
     res.status(500).json({ error: 'Error en el servidor' });
   }
 };
+
+
 
 
 
@@ -259,6 +271,9 @@ const generarYGuardarQR = async (idProducto) => {
     throw new Error(`Error generando QR: ${error.message}`);
   }
 };
+
+
+
 
 
 // //REGISTRAR PRODUCTO Y GENERAR QR 
@@ -325,14 +340,13 @@ const generarYGuardarCodigoBarras = async (codigoBarras) => {
     if (!codigoBarras || (typeof codigoBarras !== 'string' && typeof codigoBarras !== 'number')) {
       throw new Error('El código de barras es inválido');
     }
-    //Carpeta en donde se guardará el archivo de codigo de barras
+  
     const barcodesFolder = path.join(__dirname, '../public/barcodes');
     const barcodeFile = path.join(barcodesFolder, `barcode-${codigoBarras}.png`);
 
-    // Crear carpeta si no existe
     await fs.promises.mkdir(barcodesFolder, { recursive: true });
 
-    // Generar el código de barras como buffer PNG
+    // Generar el código de barras como PNG
     const pngBuffer = await bwipjs.toBuffer({
       bcid: 'code128',            // Tipo de código de barras
       text: String(codigoBarras), // Texto a codificar
@@ -352,7 +366,6 @@ const generarYGuardarCodigoBarras = async (codigoBarras) => {
     throw new Error(`Error generando código de barras: ${error.message}`);
   }
 };
-
 
 
 productoController.registrarProducto = async (req, res, next) => {
@@ -405,7 +418,6 @@ productoController.registrarProducto = async (req, res, next) => {
         });
     }
 };
-
 
 
 
