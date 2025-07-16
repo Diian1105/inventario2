@@ -65,23 +65,23 @@ Proveedor.buscarPorNombre = async (nombre) => {
 
 
 
-// //BUSCAR POR ID DE LA CATEGORIA
-// Categoria.buscarPorId = async (Id) => {
-//   const sql = `
-//     SELECT * FROM categorias
-//     WHERE id_categoria = $1
-//     ORDER BY id_categoria ASC
-//   `;
+//BUSCAR POR ID DEL PROVEEDOR
+ Proveedor.buscarPorId = async (Id) => {
+   const sql = `
+     SELECT * FROM proveedores
+     WHERE id_proveedor = $1
+     ORDER BY id_proveedor ASC
+   `;
 
-//   try {
-//     const result = await db.any(sql, [Id]);
-//     console.log('Filas obtenidas:', result);
-//     return result;
-//   } catch (error) {
-//     console.error('Error en la consulta:', error.message || error);
-//     throw error; 
-//   }
-// };
+   try {
+     const result = await db.any(sql, [Id]);
+     console.log('Filas obtenidas:', result);
+    return result;
+   } catch (error) {
+     console.error('Error en la consulta:', error.message || error);
+     throw error; 
+   }
+ };
 
 
 
