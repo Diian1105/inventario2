@@ -87,22 +87,22 @@ Cliente.registrarCliente = async (datos) => {
 
 
 
-// //ELIMINAR POR ID
-// Categoria.eliminarPorId = async (Id) => {
-//   const sql = `
-//     DELETE FROM categorias
-//     WHERE id_categoria = $1
-//   `;
+//ELIMINAR POR ID
+ Cliente.eliminarPorId = async (Id) => {
+   const sql = `
+     DELETE FROM clientes
+     WHERE id_cliente = $1
+   `;
 
-//   try {
-//     const result = await db.result(sql, [Id]);
-//     console.log(`Filas eliminadas: ${result.rowCount}`);
-//     return result.rowCount; 
-//   } catch (error) {
-//     console.error('Error al eliminar:', error.message || error);
-//     throw error;
-//   }
-// };
+   try {
+     const result = await db.result(sql, [Id]);
+     console.log(`Filas eliminadas: ${result.rowCount}`);
+     return result.rowCount; 
+   } catch (error) {
+     console.error('Error al eliminar:', error.message || error);
+     throw error;
+   }
+ };
 
 
 

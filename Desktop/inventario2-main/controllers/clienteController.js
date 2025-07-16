@@ -130,30 +130,30 @@ clienteController.getAllCliente = async (req, res) => {
 
 
 
-// //ELIMINAR POR ID
-// categoriaController.eliminarPorId = async (req, res) => {
-//   try {
-//     const { Id } = req.params;
-//     console.log('Id recibido para eliminar:', Id);
+//ELIMINAR POR ID
+ clienteController.eliminarPorId = async (req, res) => {
+   try {
+     const { Id } = req.params;
+     console.log('Id recibido para eliminar:', Id);
 
-//     if (!Id) {
-//       return res.status(400).json({ success: false, message: 'Id requerido para eliminar'});
-//     }
-//     const filasEliminadas = await Categoria.eliminarPorId(Id);
+     if (!Id) {
+       return res.status(400).json({ success: false, message: 'Id requerido para eliminar'});
+     }
+     const filasEliminadas = await Cliente.eliminarPorId(Id);
 
-//     if (filasEliminadas === 0) {
-//       return res.status(400).json({ success: false, message: 'No se encontró categoria con ese Id'});
-//     }
-//     return res.status(200).json({ success: true, message: 'Categoria eliminada correctamente'});
-//   } catch (error) {
-//     console.error('Error en controlador al eliminar:', error.mesaage);
-//     return res.status(500).json({
-//       success: false,
-//       message: 'Error interno del servidor al eliminar',
-//       error: errror.message
-//     });
-//   }
-// };
+     if (filasEliminadas === 0) {
+       return res.status(400).json({ success: false, message: 'No se encontró cliente con ese Id'});
+     }
+     return res.status(200).json({ success: true, message: 'Cliente eliminado correctamente'});
+   } catch (error) {
+     console.error('Error en controlador al eliminar:', error.mesaage);
+     return res.status(500).json({
+       success: false,
+       message: 'Error interno del servidor al eliminar',
+       error: errror.message
+     });
+   }
+ };
 
 
 
