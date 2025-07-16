@@ -107,36 +107,45 @@ Cliente.registrarCliente = async (datos) => {
 
 
 
-// //ACTUALIZAR POR ID
-// Categoria.actualizarPorId = async (id_categoria, datos) => {
-//   const {
-//     nombre_categoria,
-//     descripcion_categoria,
-//   } = datos;
+//ACTUALIZAR POR ID
+ Cliente.actualizarPorId = async (id_cliente, datos) => {
+   const {
+     nombre_cliente,
+     telefono_cliente,
+     email_cliente,
+     direccion_cliente,
+     tipo_cliente
+   } = datos;
 
-//   const sql = `
-//     UPDATE categorias
-//     SET 
-//       nombre_categoria = $1,
-//       descripcion_categoria = $2
-//     WHERE id_categoria = $3
-//   `;
+   const sql = `
+     UPDATE clientes
+     SET 
+       nombre_cliente = $1,
+       telefono_cliente = $2,
+       email_cliente = $3,
+       direccion_cliente = $4,
+       tipo_cliente = $5
+     WHERE id_cliente = $6
+   `;
 
-//   const values = [
-//     nombre_categoria,
-//     descripcion_categoria,
-//     id_categoria,
-//   ];
+   const values = [
+     nombre_cliente,
+     telefono_cliente,
+     email_cliente,
+     direccion_cliente,
+     tipo_cliente,
+     id_cliente,
+   ];
 
-//   try {
-//     const result = await db.result(sql, values);
-//     console.log(`Filas actualizadas: ${result.rowCount}`);
-//     return result.rowCount;
-//   } catch (error) {
-//     console.error('Error al actualizar:', error.message || error);
-//     throw error;
-//   }
-// };
+   try {
+     const result = await db.result(sql, values);
+     console.log(`Filas actualizadas: ${result.rowCount}`);
+     return result.rowCount;
+   } catch (error) {
+     console.error('Error al actualizar:', error.message || error);
+     throw error;
+   }
+ };
 
 
 

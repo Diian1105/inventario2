@@ -158,29 +158,28 @@ clienteController.getAllCliente = async (req, res) => {
 
 
 
-// //ACTUALIZAR POR ID
+//ACTUALIZAR POR ID
+ clienteController.actualizarPorId = async (req, res) => {
+   const id_cliente = req.params.id;
+   const datos = req.body;
 
-// categoriaController.actualizarPorId = async (req, res) => {
-//   const id_categoria = req.params.id;
-//   const datos = req.body;
+   if (!id_cliente) {
+     return res.status(400).json({ message: 'El id_cliente es requerido' });
+   }
 
-//   if (!id_categoria) {
-//     return res.status(400).json({ message: 'El id_categoria es requerido' });
-//   }
+   try {
+     const filasActualizadas = await Cliente.actualizarPorId(id_cliente, datos);
 
-//   try {
-//     const filasActualizadas = await Categoria.actualizarPorId(id_categoria, datos);
+     if (filasActualizadas === 0) {
+       return res.status(404).json({ message: 'Cliente no encontrado' });
+     }
 
-//     if (filasActualizadas === 0) {
-//       return res.status(404).json({ message: 'Categoria no encontrada' });
-//     }
-
-//     res.json({ message: 'Categoria actualizada correctamente' });
-//   } catch (error) {
-//     console.error('Error en controlador actualizarPorId:', error);
-//     res.status(500).json({ message: 'Error al actualizar la categoria' });
-//   }
-// };
+     res.json({ message: 'Cliente actualizado correctamente' });
+   } catch (error) {
+     console.error('Error en controlador actualizarPorId:', error);
+     res.status(500).json({ message: 'Error al actualizar el cliente' });
+   }
+ };
 
 
 

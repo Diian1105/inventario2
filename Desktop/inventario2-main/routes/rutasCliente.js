@@ -12,7 +12,7 @@ router.get('/getAllCliente', clienteController.getAllCliente);
 router.get('/buscarPorNombre/:nombre', clienteController.buscarPorNombre);
 router.get('/buscarPorId/:Id', clienteController.buscarPorId);
 router.get('/eliminarPorId/:Id',clienteController.eliminarPorId);
-// router.put('/actualizarPorId/:id', categoriaController.actualizarPorId);
+router.put('/actualizarPorId/:id', clienteController.actualizarPorId);
 
 
 module.exports= router;
