@@ -152,29 +152,29 @@ proveedorController.buscarPorId = async (req, res) => {
 
 
 
-// //ACTUALIZAR POR ID
+//ACTUALIZAR POR ID
 
-// categoriaController.actualizarPorId = async (req, res) => {
-//   const id_categoria = req.params.id;
-//   const datos = req.body;
+ proveedorController.actualizarPorId = async (req, res) => {
+   const id_proveedor = req.params.id;
+   const datos = req.body;
 
-//   if (!id_categoria) {
-//     return res.status(400).json({ message: 'El id_categoria es requerido' });
-//   }
+   if (!id_proveedor) {
+     return res.status(400).json({ message: 'El id_proveedor es requerido' });
+   }
 
-//   try {
-//     const filasActualizadas = await Categoria.actualizarPorId(id_categoria, datos);
+   try {
+     const filasActualizadas = await Proveedor.actualizarPorId(id_proveedor, datos);
 
-//     if (filasActualizadas === 0) {
-//       return res.status(404).json({ message: 'Categoria no encontrada' });
-//     }
+     if (filasActualizadas === 0) {
+       return res.status(404).json({ message: 'Proveedor no encontrado' });
+     }
 
-//     res.json({ message: 'Categoria actualizada correctamente' });
-//   } catch (error) {
-//     console.error('Error en controlador actualizarPorId:', error);
-//     res.status(500).json({ message: 'Error al actualizar la categoria' });
-//   }
-// };
+     res.json({ message: 'Proveedor actualizado correctamente' });
+   } catch (error) {
+     console.error('Error en controlador actualizarPorId:', error);
+     res.status(500).json({ message: 'Error al actualizar el proveedor' });
+   }
+ };
 
 
 

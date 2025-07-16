@@ -106,36 +106,48 @@ Proveedor.buscarPorNombre = async (nombre) => {
 
 
 
-// //ACTUALIZAR POR ID
-// Categoria.actualizarPorId = async (id_categoria, datos) => {
-//   const {
-//     nombre_categoria,
-//     descripcion_categoria,
-//   } = datos;
+//ACTUALIZAR POR ID
+ Proveedor.actualizarPorId = async (id_proveedor, datos) => {
+  const {
+    nombre_proveedor,
+    contacto_proveedor,
+    telefono_proveedor,
+    email_proveedor,
+    direccion_proveedor,
+    estado,
+  } = datos;
 
-//   const sql = `
-//     UPDATE categorias
-//     SET 
-//       nombre_categoria = $1,
-//       descripcion_categoria = $2
-//     WHERE id_categoria = $3
-//   `;
+  const sql = `
+    UPDATE proveedores
+    SET  
+       nombre_proveedor = $1, 
+       contacto_proveedor = $2, 
+       telefono_proveedor = $3, 
+       email_proveedor = $4, 
+       direccion_proveedor = $5, 
+       estado = $6
+    WHERE id_proveedor = $7
+  `;
 
-//   const values = [
-//     nombre_categoria,
-//     descripcion_categoria,
-//     id_categoria,
-//   ];
+  const values = [
+    nombre_proveedor,
+    contacto_proveedor,
+    telefono_proveedor,
+    email_proveedor,
+    direccion_proveedor,
+    estado,
+    id_proveedor,
+  ];
 
-//   try {
-//     const result = await db.result(sql, values);
-//     console.log(`Filas actualizadas: ${result.rowCount}`);
-//     return result.rowCount;
-//   } catch (error) {
-//     console.error('Error al actualizar:', error.message || error);
-//     throw error;
-//   }
-// };
+  try {
+    const result = await db.result(sql, values);
+    console.log(`Filas actualizadas: ${result.rowCount}`);
+    return result.rowCount;
+  } catch (error) {
+    console.error('Error al actualizar:', error.message || error);
+    throw error;
+  }
+};
 
 
 
