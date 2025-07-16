@@ -51,44 +51,44 @@ clienteController.getAllCliente = async (req, res) => {
          res.status(200).json(clientes);
      } catch (error) {
          console.error(error);
-         res.status(500).json({ message:"Error al obtener las categorias"});
+         res.status(500).json({ message:"Error al obtener clientes"});
      }
  };
 
 
 
 
-// // BUSCAR POR NOMBRE DE LA CATEGORIA
-// categoriaController.buscarPorNombre = async (req, res) => {
-//   try {
-//     const { nombre } = req.params;
-//     console.log('Nombre recibido:', nombre);
+// BUSCAR POR NOMBRE DEL CLIENTE
+ clienteController.buscarPorNombre = async (req, res) => {
+   try {
+     const { nombre } = req.params;
+     console.log('Nombre recibido:', nombre);
 
-//     if (!nombre) {
-//       return res.status(400).json({ success: false, message: 'Nombre requerido' });
-//     }
+     if (!nombre) {
+       return res.status(400).json({ success: false, message: 'Nombre requerido' });
+     }
 
-//     const resultados = await categoriaModel.buscarPorNombre(nombre);
+     const resultados = await   Cliente.buscarPorNombre(nombre);
     
-//     if (resultados.length === 0) {
-//       return res.status(200).json({ 
-//         success: true, 
-//         message: "No se encontraron categorias", 
-//         data: [] 
-//       });
-//     }
+     if (resultados.length === 0) {
+       return res.status(200).json({ 
+         success: true, 
+         message: "No se encontraron clientes", 
+         data: [] 
+       });
+     }
 
-//     return res.status(200).json({ success: true, data: resultados });
+     return res.status(200).json({ success: true, data: resultados });
 
-//   } catch (error) {
-//     console.error('Error en controlador:', error.message);
-//     return res.status(500).json({ 
-//       success: false, 
-//       message: 'Error interno del servidor',
-//       error: error.message 
-//     });
-//   }
-// };
+   } catch (error) {
+     console.error('Error en controlador:', error.message);
+     return res.status(500).json({ 
+       success: false, 
+       message: 'Error interno del servidor',
+       error: error.message 
+     });
+   }
+ };
 
 
 

@@ -45,23 +45,23 @@ Cliente.registrarCliente = async (datos) => {
 
 
 
-// //BUSCAR POR NOMBRE DE LA CATEGORIA
-// Categoria.buscarPorNombre = async (nombre) => {
-//   const sql = `
-//     SELECT * FROM categorias
-//     WHERE nombre_categoria ILIKE '%$1:value%'
-//     ORDER BY nombre_categoria ASC
-//   `;
+//BUSCAR POR NOMBRE DEL CLIENTE
+ Cliente.buscarPorNombre = async (nombre) => {
+   const sql = `
+     SELECT * FROM clientes
+     WHERE nombre_cliente ILIKE '%$1:value%'
+     ORDER BY nombre_cliente ASC
+   `;
 
-//   try {
-//     const result = await db.any(sql, [nombre]);
-//     console.log('Filas obtenidas:', result);
-//     return result;
-//   } catch (error) {
-//     console.error('Error en la consulta:', error.message || error);
-//     throw error; 
-//   }
-// };
+   try {
+     const result = await db.any(sql, [nombre]);
+     console.log('Filas obtenidas:', result);
+     return result;
+   } catch (error) {
+     console.error('Error en la consulta:', error.message || error);
+     throw error; 
+   }
+ };
 
 
 
