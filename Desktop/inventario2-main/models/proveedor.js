@@ -43,27 +43,24 @@ Proveedor.getAll = () => {
 
 
 
+//BUSCAR POR NOMBRE DEL PROVEEDOR 
+Proveedor.buscarPorNombre = async (nombre) => {
+  const sql = `
+    SELECT * FROM proveedores
+    WHERE nombre_proveedor ILIKE '%$1:value%'
+    ORDER BY nombre_proveedor ASC
+  `;
 
+  try {
+    const result = await db.any(sql, [nombre]);
+    console.log('Filas obtenidas:', result);
+    return result;
+  } catch (error) {
+    console.error('Error en la consulta:', error.message || error);
+    throw error; 
+  }
+};
 
-
-
-// //BUSCAR POR NOMBRE DE LA CATEGORIA
-// Categoria.buscarPorNombre = async (nombre) => {
-//   const sql = `
-//     SELECT * FROM categorias
-//     WHERE nombre_categoria ILIKE '%$1:value%'
-//     ORDER BY nombre_categoria ASC
-//   `;
-
-//   try {
-//     const result = await db.any(sql, [nombre]);
-//     console.log('Filas obtenidas:', result);
-//     return result;
-//   } catch (error) {
-//     console.error('Error en la consulta:', error.message || error);
-//     throw error; 
-//   }
-// };
 
 
 

@@ -9,6 +9,7 @@ const proveedorController = require('../controllers/proveedorController');
 
 router.post('/registrarProveedor', proveedorController.registrarProveedor);
 router.get('/getAllProveedor', proveedorController.getAllProveedor);
+router.get('/buscarPorNombre/:nombre', proveedorController.buscarPorNombre);
 
 
 
