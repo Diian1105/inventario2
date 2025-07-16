@@ -11,6 +11,7 @@ router.post('/registrarProveedor', proveedorController.registrarProveedor);
 router.get('/getAllProveedor', proveedorController.getAllProveedor);
 router.get('/buscarPorNombre/:nombre', proveedorController.buscarPorNombre);
 router.get('/buscarPorId/:Id', proveedorController.buscarPorId);
+router.get('/eliminarPorId/:Id',proveedorController.eliminarPorId);
 
 
 
