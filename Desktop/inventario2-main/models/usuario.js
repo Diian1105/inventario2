@@ -37,11 +37,11 @@ const Usuario = {};
 
 
 
-// //OBTENER TODOS LOS CLIENTES
-//  Cliente.getAll = () => {
-//      const sql = 'SELECT * FROM public.clientes';
-//      return db.manyOrNone(sql);
-//  }
+//OBTENER TODOS LOS USUARIOS
+  Usuario.getAll = () => {
+      const sql = 'SELECT * FROM public.usuarios';
+      return db.manyOrNone(sql);
+  }
 
 
 

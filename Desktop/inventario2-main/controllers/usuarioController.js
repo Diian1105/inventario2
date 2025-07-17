@@ -43,16 +43,16 @@ const usuarioController = {};
 
 
 
-// //OBTENER TODOS LOS CLIENTES
-// clienteController.getAllCliente = async (req, res) => {
-//      try {
-//          const clientes = await Cliente.getAll();
-//          res.status(200).json(clientes);
-//      } catch (error) {
-//          console.error(error);
-//          res.status(500).json({ message:"Error al obtener clientes"});
-//      }
-//  };
+//OBTENER TODOS LOS USUARIOS
+ usuarioController.getAllUsuario = async (req, res) => {
+      try {
+          const usuarios = await Usuario.getAll();
+          res.status(200).json(usuarios);
+      } catch (error) {
+          console.error(error);
+          res.status(500).json({ message:"Error al obtener usuarios"});
+      }
+  };
 
 
 
