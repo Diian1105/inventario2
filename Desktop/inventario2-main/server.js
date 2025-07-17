@@ -14,6 +14,8 @@ const categoria = require ('./routes/rutasCategoria');  // categorias
 const proveedor = require ('./routes/rutasProveedor');  //proveedores
 const cliente = require ('./routes/rutasCliente');      //clientes
 const usuario = require ('./routes/rutasUsuario');      //usuarios
+const venta = require ('./routes/rutasVenta');          //ventas
+
 
 
 
@@ -34,7 +36,9 @@ app.use('/api/productos', producto);     //productos
 app.use('/api/categorias',categoria);    //categorias
 app.use('/api/proveedores', proveedor);  //proveedores
 app.use('/api/clientes', cliente);       //clientes
-app.use('/api/usuarios',usuario);        //usuarios
+app.use('/api/usuarios', usuario);        //usuarios
+app.use('/api/ventas', venta);           //ventas
+
 
 
 app.get('/', (req, res)=>{
