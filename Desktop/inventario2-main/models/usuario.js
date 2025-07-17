@@ -46,23 +46,23 @@ const Usuario = {};
 
 
 
-// //BUSCAR POR NOMBRE DEL CLIENTE
-//  Cliente.buscarPorNombre = async (nombre) => {
-//    const sql = `
-//      SELECT * FROM clientes
-//      WHERE nombre_cliente ILIKE '%$1:value%'
-//      ORDER BY nombre_cliente ASC
-//    `;
+//BUSCAR POR NOMBRE DEL USUARIO
+  Usuario.buscarPorNombre = async (nombre) => {
+    const sql = `
+      SELECT * FROM usuarios
+      WHERE nombre_usuario ILIKE '%$1:value%'
+      ORDER BY nombre_usuario ASC
+    `;
 
-//    try {
-//      const result = await db.any(sql, [nombre]);
-//      console.log('Filas obtenidas:', result);
-//      return result;
-//    } catch (error) {
-//      console.error('Error en la consulta:', error.message || error);
-//      throw error; 
-//    }
-//  };
+    try {
+      const result = await db.any(sql, [nombre]);
+      console.log('Filas obtenidas:', result);
+      return result;
+    } catch (error) {
+      console.error('Error en la consulta:', error.message || error);
+      throw error; 
+    }
+  };
 
 
 
