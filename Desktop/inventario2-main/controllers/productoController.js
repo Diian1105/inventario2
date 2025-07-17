@@ -1,5 +1,4 @@
-
-const productoModels = require('../models/producto');
+//const productoModels = require('../models/producto');
 const Producto = require('../models/producto');
 const productoController = {};
 
@@ -21,7 +20,7 @@ const bwipjs = require ('bwip-js');
 //OBTENER TODOS LOS PRODUCTOS
 productoController.getAllProductos = async (req, res) => {
     try {
-        const productos = await productoModels.getAll();
+        const productos = await Producto.getAll();
         res.status(200).json(productos);
     } catch (error) {
         console.error(error);
@@ -62,7 +61,7 @@ productoController.registrarProducto = async (req, res, next) => {
             });
         }
 
-        const nuevoProducto = await productoModels.registrarProducto(req.body);
+        const nuevoProducto = await producto.registrarProducto(req.body);
 
          return res.status(201).json({
             success: true,
