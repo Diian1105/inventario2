@@ -129,56 +129,56 @@ const usuarioController = {};
 
 
 
-// //ELIMINAR POR ID
-//  clienteController.eliminarPorId = async (req, res) => {
-//    try {
-//      const { Id } = req.params;
-//      console.log('Id recibido para eliminar:', Id);
+//ELIMINAR POR ID
+  usuarioController.eliminarPorId = async (req, res) => {
+    try {
+      const { Id } = req.params;
+      console.log('Id recibido para eliminar:', Id);
 
-//      if (!Id) {
-//        return res.status(400).json({ success: false, message: 'Id requerido para eliminar'});
-//      }
-//      const filasEliminadas = await Cliente.eliminarPorId(Id);
+      if (!Id) {
+        return res.status(400).json({ success: false, message: 'Id requerido para eliminar'});
+      }
+      const filasEliminadas = await Usuario.eliminarPorId(Id);
 
-//      if (filasEliminadas === 0) {
-//        return res.status(400).json({ success: false, message: 'No se encontró cliente con ese Id'});
-//      }
-//      return res.status(200).json({ success: true, message: 'Cliente eliminado correctamente'});
-//    } catch (error) {
-//      console.error('Error en controlador al eliminar:', error.mesaage);
-//      return res.status(500).json({
-//        success: false,
-//        message: 'Error interno del servidor al eliminar',
-//        error: errror.message
-//      });
-//    }
-//  };
-
-
+      if (filasEliminadas === 0) {
+        return res.status(400).json({ success: false, message: 'No se encontró usuario con ese Id'});
+      }
+      return res.status(200).json({ success: true, message: 'Usuario eliminado correctamente'});
+    } catch (error) {
+      console.error('Error en controlador al eliminar:', error.mesaage);
+      return res.status(500).json({
+        success: false,
+        message: 'Error interno del servidor al eliminar',
+        error: error.message
+      });
+    }
+  };
 
 
-// //ACTUALIZAR POR ID
-//  clienteController.actualizarPorId = async (req, res) => {
-//    const id_cliente = req.params.id;
-//    const datos = req.body;
 
-//    if (!id_cliente) {
-//      return res.status(400).json({ message: 'El id_cliente es requerido' });
-//    }
 
-//    try {
-//      const filasActualizadas = await Cliente.actualizarPorId(id_cliente, datos);
+//ACTUALIZAR POR ID
+  usuarioController.actualizarPorId = async (req, res) => {
+    const id_usuario = req.params.id;
+    const datos = req.body;
 
-//      if (filasActualizadas === 0) {
-//        return res.status(404).json({ message: 'Cliente no encontrado' });
-//      }
+    if (!id_usuario) {
+      return res.status(400).json({ message: 'El id_usuario es requerido' });
+    }
 
-//      res.json({ message: 'Cliente actualizado correctamente' });
-//    } catch (error) {
-//      console.error('Error en controlador actualizarPorId:', error);
-//      res.status(500).json({ message: 'Error al actualizar el cliente' });
-//    }
-//  };
+    try {
+      const filasActualizadas = await Usuario.actualizarPorId(id_usuario, datos);
+
+      if (filasActualizadas === 0) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      res.json({ message: 'Usuario actualizado correctamente' });
+    } catch (error) {
+      console.error('Error en controlador actualizarPorId:', error);
+      res.status(500).json({ message: 'Error al actualizar el usuario' });
+    }
+  };
 
 
 
