@@ -44,15 +44,15 @@ const ventaController = {};
 
 
 //OBTENER TODOS LOS USUARIOS
-  // usuarioController.getAllUsuario = async (req, res) => {
-  //      try {
-  //          const usuarios = await Usuario.getAll();
-  //          res.status(200).json(usuarios);
-  //      } catch (error) {
-  //          console.error(error);
-  //          res.status(500).json({ message:"Error al obtener usuarios"});
-  //      }
-  //  };
+ ventaController.getAllVenta = async (req, res) => {
+      try {
+          const ventas = await Venta.getAll();
+          res.status(200).json(ventas);
+      } catch (error) {
+          console.error(error);
+          res.status(500).json({ message:"Error al obtener ventas"});
+       }
+  };
 
 
 

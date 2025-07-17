@@ -34,11 +34,11 @@ const Venta = {};
 
 
 
-// //OBTENER TODAS LAS VENTAS
-//    Venta.getAll = () => {
-//        const sql = 'SELECT * FROM public.ventas';
-//        return db.manyOrNone(sql);
-//    }
+//OBTENER TODAS LAS VENTAS
+    Venta.getAll = () => {
+        const sql = 'SELECT * FROM public.ventas';
+        return db.manyOrNone(sql);
+    }
 
 
 
