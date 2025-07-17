@@ -10,7 +10,7 @@ const usuarioController = require('../controllers/usuarioController');
 router.post('/registrarUsuario', usuarioController.registrarUsuario);
 router.get('/getAllUsuarios', usuarioController.getAllUsuario);
 router.get('/buscarPorNombre/:nombre', usuarioController.buscarPorNombre);
-// router.get('/buscarPorId/:Id', clienteController.buscarPorId);
+router.get('/buscarPorId/:Id', usuarioController.buscarPorId);
 // router.get('/eliminarPorId/:Id',clienteController.eliminarPorId);
 // router.put('/actualizarPorId/:id', clienteController.actualizarPorId);
 

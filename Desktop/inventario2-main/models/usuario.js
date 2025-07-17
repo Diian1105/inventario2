@@ -67,23 +67,23 @@ const Usuario = {};
 
 
 
-// //BUSCAR POR ID DEL CLIENTE
-//  Cliente.buscarPorId = async (Id) => {
-//    const sql = `
-//      SELECT * FROM clientes
-//      WHERE id_cliente = $1
-//      ORDER BY id_cliente ASC
-//    `;
+//BUSCAR POR ID DEL CLIENTE
+  Usuario.buscarPorId = async (Id) => {
+    const sql = `
+      SELECT * FROM usuarios
+      WHERE id_usuario = $1
+      ORDER BY id_usuario ASC
+    `;
 
-//    try {
-//      const result = await db.any(sql, [Id]);
-//      console.log('Filas obtenidas:', result);
-//      return result;
-//    } catch (error) {
-//      console.error('Error en la consulta:', error.message || error);
-//      throw error; 
-//    }
-//  };
+    try {
+      const result = await db.any(sql, [Id]);
+      console.log('Filas obtenidas:', result);
+      return result;
+    } catch (error) {
+      console.error('Error en la consulta:', error.message || error);
+      throw error; 
+    }
+  };
 
 
 
