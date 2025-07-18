@@ -61,7 +61,7 @@ productoController.registrarProducto = async (req, res, next) => {
             });
         }
 
-        const nuevoProducto = await producto.registrarProducto(req.body);
+        const nuevoProducto = await Producto.registrarProducto(req.body);
 
          return res.status(201).json({
             success: true,

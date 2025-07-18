@@ -1,5 +1,5 @@
 const Categoria = require('../models/categoria');
-const categoriaModel = require('../models/categoria');
+//const categoriaModel = require('../models/categoria');
 const categoriaController = {};
 
 
@@ -18,7 +18,7 @@ categoriaController.registrarCategoria = async (req, res, next) => {
                 message: "Faltan campos requeridos",
             });
         }
-        const nuevaCategoria = await categoriaModel.registrarCategoria(categoria);
+        const nuevaCategoria = await Categoria.registrarCategoria(categoria);
 
         return res.status(201).json({
             success: true,
@@ -41,7 +41,7 @@ categoriaController.registrarCategoria = async (req, res, next) => {
 //OBTENER TODAS LAS CATEGORIAS
 categoriaController.getAllCategoria = async (req, res) => {
     try {
-        const categorias = await categoriaModel.getAll();
+        const categorias = await Categoria.getAll();
         res.status(200).json(categorias);
     } catch (error) {
         console.error(error);
@@ -62,7 +62,7 @@ categoriaController.buscarPorNombre = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Nombre requerido' });
     }
 
-    const resultados = await categoriaModel.buscarPorNombre(nombre);
+    const resultados = await Categoria.buscarPorNombre(nombre);
     
     if (resultados.length === 0) {
       return res.status(200).json({ 
