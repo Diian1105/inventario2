@@ -7,7 +7,7 @@ const productoController = {};
 //OBTENER TODOS LOS PRODUCTOS
 productoController.getAllProductos = async (req, res) => {
     try {
-        const productos = await productoModels.getAll();
+        const productos = await Producto.getAll();
         res.status(200).json(productos);
     } catch (error) {
         console.error(error);
@@ -45,12 +45,12 @@ productoController.registrarProducto = async (req, res, next) => {
             });
         }
 
-        const nuevoProducto = await productoModels.registrarProducto(req.body);
+        productoNuevo = await Producto.registrarProducto(req.body);
 
          return res.status(201).json({
             success: true,
             message: "Producto registrado correctamente",
-            data: nuevoProducto
+            data: productoNuevo
         });
 
     } catch (error) {
